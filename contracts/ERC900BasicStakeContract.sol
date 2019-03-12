@@ -20,7 +20,7 @@ contract ArianeeStaking is ERC900 {
   ERC20 stakingToken;
 
   // The default duration of stake lock-in (in seconds)
-  uint256 public defaultLockInDuration;
+  uint256 public defaultLockInDuration = 2419200; // 4 weeks
 
   // To save on gas, rather than create a separate mapping for totalStakedFor & personalStakes,
   //  both data structures are stored in a single mapping for a given addresses.
