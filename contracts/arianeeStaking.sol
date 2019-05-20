@@ -324,7 +324,7 @@ contract ArianeeStaking is ERC900 {
         minimalUSDStakable = _newMinimalUSDStakable;
     }
     
-    function stakeWithMinimal(uint256 _amount, bytes memory _data) public{
+    function stakeWithMinimal(uint256 _amount, bytes memory _data) public {
         require(_amount >= minimalUSDStakable * ariaUSDExchange);
         createStake(msg.sender, _amount, defaultLockInDuration, _data);
         emit newStake(_amount, msg.sender);
@@ -334,6 +334,12 @@ contract ArianeeStaking is ERC900 {
         feesReceiver = _newFeesReceiver;
     }
     
+    uint fees = 2;
+    
+    function udpateFees(uint8 _fees) public{
+        fees = _fees;
+    }
+    
     /**
      * 
      */
@@ -341,12 +347,12 @@ contract ArianeeStaking is ERC900 {
     function unlockStakeWithFee(address _staker, uint256 _percentUnstake) public {
         
         uint256 calculableStake = stakeHolders[_staker].totalStakedFor*100;
-        uint256 _fees = (calculableStake/100)*2;
+        uint256 _fees = (calculableStake/100)*fees;
         
         stakeHolders[_staker].totalStakedFor = (((calculableStake-_fees)/100)*_percentUnstake)/100;
-        stakeHolders[_staker].personalStakes[0].actualAmount = stakeHolders[_staker].totalStakedFor;
+        stakeHolders[_staker].personalStakes[stakeHolders[_staker].personalStakeIndex].actualAmount = stakeHolders[_staker].totalStakedFor;
         
-        stakeHolders[_staker].personalStakes[0].unlockedTimestamp = block.timestamp;
+        stakeHolders[_staker].personalStakes[stakeHolders[_staker].personalStakeIndex].unlockedTimestamp = block.timestamp;
         stakingToken.transfer(feesReceiver, _fees/100);
     }
     
