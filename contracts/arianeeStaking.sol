@@ -1,5 +1,5 @@
 /* solium-disable security/no-block-members */
-pragma solidity 0.5.1;
+pragma solidity 0.5.6;
 
 
 import "@0xcert/ethereum-erc20-contracts/src/contracts/erc20.sol";

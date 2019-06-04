@@ -1,4 +1,4 @@
-pragma solidity 0.5.1;
+pragma solidity 0.5.6;
 
 /// @title Base contract with an owner.
 /// @dev Provides onlyOwner modifier, which prevents function from running if
